@@ -1,0 +1,33 @@
+#pragma once
+
+#include <util/debug.h>
+#include <string>
+#include <vector>
+#include <glm/glm.hpp>
+#include <glm/serialize.hpp>
+#include <boost/serialization/vector.hpp>;
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+
+class Template : public Entity{
+private:
+  // Allow serialization to access non-public data members.
+  friend class boost::serialization::access;
+
+  // Serialize the std::vector member of Info
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & ... ;
+  }
+
+public:
+  Template();
+  ~Template();
+  void Init();
+  void Step();
+  void Render();
+  void Finish();
+};
